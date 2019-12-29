@@ -39,6 +39,8 @@
 | ComboNet (SEResNeXt50) | 2 | 0.8201 | 1.0490 | 0.5059 |
 | ComboNet (SEResNeXt50) | 3 | 0.8124 | 1.0399 | 0.5027 |
 | ComboNet (SEResNeXt50) | 4 | 0.8111 | 1.0216 | 0.4965 |
+| ComboNet (SEResNeXt50) | 5 | 0.8110 | 1.0409 | 0.4888 |
+| ComboNet (SEResNeXt50) | AVG | 0.8119 | 1.0441 | 0.4982 |
 
 
 ### Evaluation on SCUT-FBP5500 (5-Fold Cross Validation)
