@@ -54,8 +54,20 @@
 | ComboNet (SEResNeXt50)  | AVG | 0.2170 | 0.2742 | 0.9177 |
 
 
+## Comparison with prior arts on SCUT-FBP5500
+| Models | MAE | RMSE | PC |
+| :---: | :---: | :---: | :---: |
+| ResNeXt-50 | 0.2291 | 0.3017 | 0.8997 |
+| ResNet-18	| 0.2419 | 0.3166 | 0.8900 |
+| AlexNet | 0.2651 | 0.3481	| 0.8634 |
+| HMTNet | 0.2380 | 0.3141 | 0.8912 |
+| AaNet | 0.2236 | 0.2954 | 0.9055 |
+| **ComboLoss (Ours)** | **0.2170** | **0.2742** | **0.9177** |
+
+
 ## Reference
 1. Xu L, Xiang J, Yuan X. CRNet: Classification and Regression Neural Network for Facial Beauty Prediction[C]//Pacific Rim Conference on Multimedia. Springer, Cham, 2018: 661-671.
 2. Lin L, Liang L, Jin L, et al. [Attribute-aware convolutional neural networks for facial beauty prediction](https://www.ijcai.org/proceedings/2019/0119.pdf)[C]//Proceedings of the 28th International Joint Conference on Artificial Intelligence. AAAI Press, 2019: 847-853.
 3. Xu L, Fan H, Xiang J. Hierarchical Multi-Task Network For Race, Gender and Facial Attractiveness Recognition[C]//2019 IEEE International Conference on Image Processing (ICIP). IEEE, 2019: 3861-3865.
 4. Liu X, Li T, Peng H, et al. [Understanding beauty via deep facial features](http://openaccess.thecvf.com/content_CVPRW_2019/papers/AMFG/Liu_Understanding_Beauty_via_Deep_Facial_Features_CVPRW_2019_paper.pdf)[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition Workshops. 2019: 0-0.
+5. Liang L, Lin L, Jin L, et al. SCUT-FBP5500: A diverse benchmark dataset for multi-paradigm facial beauty prediction[C]//2018 24th International Conference on Pattern Recognition (ICPR). IEEE, 2018: 1598-1603.
