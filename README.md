@@ -21,6 +21,9 @@
 | ComboNet (SEResNeXt50)  | CombinedLoss (alpha=1, beta=2) | 0.2150 | 0.2868 | 0.9063 |
 | ComboNet (SEResNeXt50)  | CombinedLoss (alpha=1, beta=2) | 0.2176 | 0.2895 | 0.9044 |
 | ComboNet (SEResNeXt50)  | CombinedLoss (alpha=1, beta=3) | 0.2171 | 0.2862 | 0.9071 |
+| ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=1) | 0.2215 | 0.2936 | 0.9021 |
+| ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=2) | 0.2202 | 0.2907 | 0.9041 |
+| ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=3) | 0.2252 | 0.2991 | 0.8980 |
 
 ### Evaluation on SCUT-FBP
 | Backbone | CV | MAE | RMSE | PC |
