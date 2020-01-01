@@ -24,6 +24,8 @@
 | ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=1) | 0.2215 | 0.2936 | 0.9021 |
 | ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=2) | 0.2202 | 0.2907 | 0.9041 |
 | ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=3) | 0.2252 | 0.2991 | 0.8980 |
+| ComboNet (ResNet18)  | CombinedLoss (alpha=2, beta=1) | 0.2557 | 0.3362 | 0.8780 |
+| ComboNet (ResNet18)  | CombinedLoss (alpha=3, beta=1) | 0.2513 | 0.3364 | 0.8788 |
 
 ### Evaluation on SCUT-FBP
 | Backbone | CV | MAE | RMSE | PC |
