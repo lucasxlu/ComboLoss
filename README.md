@@ -1,4 +1,23 @@
 # ComboLoss for Facial Beauty Prediction
+## Introduction
+**ComboLoss** is a too young too simple, sometimes naive approach for facial attractiveness regression. 
+It can embed 3 different facial beauty information with 3 branches. ComboLoss achieves state-of-the-art performance on
+``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset`` with SEResNeXt as backbone, which outperforms many methods published at IJCAI,
+ICIP, ICASSP, ICPR, PCM and etc.
+
+ComboLoss is an advanced version of [CRNet](https://link.springer.com/chapter/10.1007/978-3-030-00764-5_61). If you find the code
+helps your research, please cite this paper as:
+```
+@inproceedings{xu2018crnet,
+  title={CRNet: Classification and Regression Neural Network for Facial Beauty Prediction},
+  author={Xu, Lu and Xiang, Jinhai and Yuan, Xiaohui},
+  booktitle={Pacific Rim Conference on Multimedia},
+  pages={661--671},
+  year={2018},
+  organization={Springer}
+}
+```
+
 
 ## Data Description
 | Dataset | Median | Mean |
@@ -9,7 +28,7 @@
 
 
 ## Performance Evaluation
-### Evaluation on SCUT-FBP5500 (6/4 splitting strategy)
+### Evaluation & Ablation Analysis on SCUT-FBP5500 (6/4 splitting strategy)
 | Backbone | Loss | MAE | RMSE | PC |
 | :---: | :---: | :---: | :---: | :---: |
 | SEResNeXt50 | L1 | 0.2212 | 0.2941 | 0.9012 |
@@ -71,8 +90,8 @@
 
 
 ## Reference
-1. Xu L, Xiang J, Yuan X. CRNet: Classification and Regression Neural Network for Facial Beauty Prediction[C]//Pacific Rim Conference on Multimedia. Springer, Cham, 2018: 661-671.
+1. Xu L, Xiang J, Yuan X. [CRNet: Classification and Regression Neural Network for Facial Beauty Prediction](https://link.springer.com/chapter/10.1007/978-3-030-00764-5_61)[C]//Pacific Rim Conference on Multimedia. Springer, Cham, 2018: 661-671.
 2. Lin L, Liang L, Jin L, et al. [Attribute-aware convolutional neural networks for facial beauty prediction](https://www.ijcai.org/proceedings/2019/0119.pdf)[C]//Proceedings of the 28th International Joint Conference on Artificial Intelligence. AAAI Press, 2019: 847-853.
-3. Xu L, Fan H, Xiang J. Hierarchical Multi-Task Network For Race, Gender and Facial Attractiveness Recognition[C]//2019 IEEE International Conference on Image Processing (ICIP). IEEE, 2019: 3861-3865.
+3. Xu L, Fan H, Xiang J. [Hierarchical Multi-Task Network For Race, Gender and Facial Attractiveness Recognition](https://ieeexplore.ieee.org/abstract/document/8803614/)[C]//2019 IEEE International Conference on Image Processing (ICIP). IEEE, 2019: 3861-3865.
 4. Liu X, Li T, Peng H, et al. [Understanding beauty via deep facial features](http://openaccess.thecvf.com/content_CVPRW_2019/papers/AMFG/Liu_Understanding_Beauty_via_Deep_Facial_Features_CVPRW_2019_paper.pdf)[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition Workshops. 2019: 0-0.
-5. Liang L, Lin L, Jin L, et al. SCUT-FBP5500: A diverse benchmark dataset for multi-paradigm facial beauty prediction[C]//2018 24th International Conference on Pattern Recognition (ICPR). IEEE, 2018: 1598-1603.
+5. Liang L, Lin L, Jin L, et al. [SCUT-FBP5500: A diverse benchmark dataset for multi-paradigm facial beauty prediction](https://arxiv.org/pdf/1801.06345.pdf)[C]//2018 24th International Conference on Pattern Recognition (ICPR). IEEE, 2018: 1598-1603.
