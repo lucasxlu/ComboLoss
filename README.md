@@ -1,11 +1,11 @@
 # ComboLoss for Facial Beauty Prediction
 ## Introduction
 **ComboLoss** is a too young too simple, sometimes naive approach for facial attractiveness regression. It can embed 3 different facial beauty information from a regression branch and a classification branch. 
-With SEResNeXt as backbone, ComboLoss achieves state-of-the-art performance on ``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset``, whicih outperforms many methods published at IJCAI, IEEE Transactions on Affective Computing, ICIP, ICASSP, ICPR, PCM and etc.
+With SEResNeXt as backbone, ComboLoss achieves state-of-the-art performance on ``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset``, which outperforms many methods published at IJCAI, IEEE Transactions on Affective Computing, ICIP, ICASSP, ICPR, PCM and etc.
 
 ![ComboLoss](./comboloss.png)
 
-ComboLoss is actually an advanced version of [CRNet](https://link.springer.com/chapter/10.1007/978-3-030-00764-5_61). If you find the code helps your research, please cite this paper as:
+ComboLoss can be regarded as an advanced version of [CRNet](https://link.springer.com/chapter/10.1007/978-3-030-00764-5_61). If you find the code helps your research, please cite this paper as:
 ```
 @inproceedings{xu2018crnet,
   title={CRNet: Classification and Regression Neural Network for Facial Beauty Prediction},
