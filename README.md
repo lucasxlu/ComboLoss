@@ -1,6 +1,7 @@
 # ComboLoss for Facial Beauty Prediction
 ## Introduction
-**ComboLoss** is a too young too simple, sometimes naive approach for facial attractiveness regression. It can embed 3 different facial beauty information with 3 branches. ComboLoss achieves state-of-the-art performance on ``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset``. With SEResNeXt as backbone, it outperforms many methods published at IJCAI, ICIP, ICASSP, ICPR, PCM and etc.
+**ComboLoss** is a too young too simple, sometimes naive approach for facial attractiveness regression. It can embed 3 different facial beauty information from a regression branch and a classification branch. 
+With SEResNeXt as backbone, ComboLoss achieves state-of-the-art performance on ``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset``, whicih outperforms many methods published at IJCAI, IEEE Transactions on Affective Computing, ICIP, ICASSP, ICPR, PCM and etc.
 
 ![ComboLoss](./comboloss.png)
 
@@ -77,14 +78,16 @@ ComboLoss is actually an advanced version of [CRNet](https://link.springer.com/c
 
 
 ## Comparison with prior arts on SCUT-FBP5500
-| Models | MAE | RMSE | PC |
-| :---: | :---: | :---: | :---: |
-| ResNeXt-50 | 0.2291 | 0.3017 | 0.8997 |
-| ResNet-18	| 0.2419 | 0.3166 | 0.8900 |
-| AlexNet | 0.2651 | 0.3481	| 0.8634 |
-| HMTNet | 0.2380 | 0.3141 | 0.8912 |
-| AaNet | 0.2236 | 0.2954 | 0.9055 |
-| **ComboLoss (Ours)** | **0.2170** | **0.2742** | **0.9177** |
+| Models | Published At | MAE | RMSE | PC |
+| :---: | :---: | :---: | :---: | :---: |
+| ResNeXt-50 | CVPR'16 | 0.2291 | 0.3017 | 0.8997 |
+| ResNet-18	| CVPR'16 | 0.2419 | 0.3166 | 0.8900 |
+| AlexNet | NIPS'12 | 0.2651 | 0.3481	| 0.8634 |
+| HMTNet | ICIP'19 | 0.2380 | 0.3141 | 0.8912 |
+| AaNet | IJCAI'19 | 0.2236 | 0.2954 | 0.9055 |
+| R^2 ResNeXt  | ICPR'18 | 0.2416 | 0.3046 | 0.8957 |
+| R^3CNN | IEEE Trans on Affective Computing | 0.2120 | 0.2800 | 0.9142 |
+| **ComboLoss (Ours)** | - | 0.2170 | **0.2742** | **0.9177** |
 
 
 ## Reference
@@ -93,3 +96,5 @@ ComboLoss is actually an advanced version of [CRNet](https://link.springer.com/c
 3. Xu L, Fan H, Xiang J. [Hierarchical Multi-Task Network For Race, Gender and Facial Attractiveness Recognition](https://ieeexplore.ieee.org/abstract/document/8803614/)[C]//2019 IEEE International Conference on Image Processing (ICIP). IEEE, 2019: 3861-3865.
 4. Liu X, Li T, Peng H, et al. [Understanding beauty via deep facial features](http://openaccess.thecvf.com/content_CVPRW_2019/papers/AMFG/Liu_Understanding_Beauty_via_Deep_Facial_Features_CVPRW_2019_paper.pdf)[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition Workshops. 2019: 0-0.
 5. Liang L, Lin L, Jin L, et al. [SCUT-FBP5500: A diverse benchmark dataset for multi-paradigm facial beauty prediction](https://arxiv.org/pdf/1801.06345.pdf)[C]//2018 24th International Conference on Pattern Recognition (ICPR). IEEE, 2018: 1598-1603.
+6. Lin L, Liang L, Jin L. [Regression Guided by Relative Ranking Using Convolutional Neural Network (R3CNN) for Facial Beauty Prediction](https://ieeexplore.ieee.org/abstract/document/8789541/)[J]. IEEE Transactions on Affective Computing, 2019.
+7. Lin L, Liang L, Jin L. [R 2-ResNeXt: A ResNeXt-Based Regression Model with Relative Ranking for Facial Beauty Prediction](https://ieeexplore.ieee.org/abstract/document/8545164/)[C]//2018 24th International Conference on Pattern Recognition (ICPR). IEEE, 2018: 85-90.
