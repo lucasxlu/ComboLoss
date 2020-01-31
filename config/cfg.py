@@ -8,5 +8,5 @@ cfg['cv_index'] = 1
 cfg['scutfbp5500_base'] = '/home/xulu/DataSet/SCUT-FBP5500'
 
 cfg['batch_size'] = 64
-cfg['epoch'] = 400
+cfg['epoch'] = 200
 cfg['random_seed'] = 40

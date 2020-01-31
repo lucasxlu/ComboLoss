@@ -1,22 +1,18 @@
-# ComboLoss for Facial Beauty Prediction
+# ComboLoss for Facial Attractiveness Analysis with Squeeze-and-Excitation Networks
 ## Introduction
-**ComboLoss** is a too young too simple, sometimes naive approach for facial attractiveness regression. It can embed 3 different facial beauty information from a regression branch and a classification branch. 
-With SEResNeXt as backbone, ComboLoss achieves state-of-the-art performance on ``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset``, which outperforms many methods published at IJCAI, IEEE Transactions on Affective Computing, ICIP, ICASSP, ICPR, PCM and etc.
+**ComboLoss** is a simple yet effective approach for facial attractiveness regression. It can embed 3 different facial beauty information from a regression branch and a classification branch. 
+With SEResNeXt50 as backbone, ComboLoss achieves state-of-the-art performance on ``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset``, which outperforms many methods published at IJCAI, IEEE Transactions on Affective Computing, ICIP, ICASSP, ICPR, PCM and etc.
 
 ![ComboLoss](./comboloss.png)
 
-ComboLoss can be regarded as an advanced version of [CRNet](https://link.springer.com/chapter/10.1007/978-3-030-00764-5_61). If you find the code helps your research, please cite this paper as:
+If you find the code helps your research, please cite this project as:
 ```
-@inproceedings{xu2018crnet,
-  title={CRNet: Classification and Regression Neural Network for Facial Beauty Prediction},
-  author={Xu, Lu and Xiang, Jinhai and Yuan, Xiaohui},
-  booktitle={Pacific Rim Conference on Multimedia},
-  pages={661--671},
-  year={2018},
-  organization={Springer}
+@misc{xu2019comboloss,
+  title={ComboLoss for Facial Attractiveness Analysis with Squeeze-and-Excitation Networks},
+  author={Lu Xu and Jinhai Xiang},
+  year={2020}
 }
 ```
-
 
 ## Data Description
 | Dataset | Median | Mean |
@@ -31,19 +27,20 @@ ComboLoss can be regarded as an advanced version of [CRNet](https://link.springe
 | Backbone | Loss | MAE | RMSE | PC |
 | :---: | :---: | :---: | :---: | :---: |
 | SEResNeXt50 | L1 | 0.2212 | 0.2941 | 0.9012 |
-| SEResNeXt50 | MSE | 0.2195 | 0.2947 | 0.9008 |
-| ComboNet (SEResNeXt50) | CombinedLoss (alpha=1, beta=1) | 0.2135 | 0.2818 | 0.9099 |
-| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=2, beta=1) | 0.2191 | 0.2891 | 0.9066 |
-| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=2, beta=1) | 0.2124 | 0.2803 | 0.9108 |
-| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=3, beta=1) | 0.2190 | 0.2894 | 0.9053 |
-| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=1, beta=2) | 0.2150 | 0.2868 | 0.9063 |
-| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=1, beta=2) | 0.2176 | 0.2895 | 0.9044 |
-| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=1, beta=3) | 0.2171 | 0.2862 | 0.9071 |
-| ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=1) | 0.2215 | 0.2936 | 0.9021 |
-| ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=2) | 0.2202 | 0.2907 | 0.9041 |
-| ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=3) | 0.2252 | 0.2991 | 0.8980 |
-| ComboNet (ResNet18)  | CombinedLoss (alpha=2, beta=1) | 0.2557 | 0.3362 | 0.8780 |
-| ComboNet (ResNet18)  | CombinedLoss (alpha=3, beta=1) | 0.2513 | 0.3364 | 0.8788 |
+| SEResNeXt50 | MSE | 0.2189 | 0.2907 | 0.9041 |
+| SEResNeXt50 | SmoothL1 | 0.2204 | 0.2901 | 0.9050 |
+| ComboNet (SEResNeXt50) | CombinedLoss (alpha=1, beta=1, gamma=1) | 0.2135 | 0.2818 | 0.9099 |
+| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=2, beta=1, gamma=1) | 0.2191 | 0.2891 | 0.9066 |
+| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=2, beta=1, gamma=1) | 0.2124 | 0.2803 | 0.9108 |
+| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=3, beta=1, gamma=1) | 0.2190 | 0.2894 | 0.9053 |
+| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=1, beta=2, gamma=1) | 0.2150 | 0.2868 | 0.9063 |
+| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=1, beta=2, gamma=1) | 0.2176 | 0.2895 | 0.9044 |
+| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=1, beta=3, gamma=1) | 0.2171 | 0.2862 | 0.9071 |
+| ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=1, gamma=1) | 0.2215 | 0.2936 | 0.9021 |
+| ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=2, gamma=1) | 0.2202 | 0.2907 | 0.9041 |
+| ComboNet (ResNet18)  | CombinedLoss (alpha=1, beta=3, gamma=1) | 0.2252 | 0.2991 | 0.8980 |
+| ComboNet (ResNet18)  | CombinedLoss (alpha=2, beta=1, gamma=1) | 0.2557 | 0.3362 | 0.8780 |
+| ComboNet (ResNet18)  | CombinedLoss (alpha=3, beta=1, gamma=1) | 0.2513 | 0.3364 | 0.8788 |
 
 ### Evaluation on SCUT-FBP
 | Backbone | CV | MAE | RMSE | PC |
@@ -54,6 +51,11 @@ ComboLoss can be regarded as an advanced version of [CRNet](https://link.springe
 | SEResNeXt50 | 4 | 0.2282 | 0.2992 | 0.9238 |
 | SEResNeXt50 | 5 | 0.2171 | 0.2889 | 0.9051 |
 | SEResNeXt50 | AVG | 0.2368 | 0.3054 | 0.9075 |
+| ComboNet (SEResNeXt50) | 1 | 0.2606 | 0.3338 | 0.8955 |
+| ComboNet (SEResNeXt50) | 2 |  |  |  |
+| ComboNet (SEResNeXt50) | 3 |  |  |  |
+| ComboNet (SEResNeXt50) | 4 |  |  |  |
+| ComboNet (SEResNeXt50) | 5 |  |  |  |
 
 ### Evaluation on HotOrNot
 | Backbone | CV | MAE | RMSE | PC |

@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 
 import numpy as np
+from torch.nn.modules.loss import _Loss
+from torch.nn import functional as F
 
 from config.cfg import cfg
 from models.ssim import SSIMLoss
@@ -55,18 +57,44 @@ class CombinedLoss(nn.Module):
     CombinedLoss = \alpha \|y_i - \hat{y}_i\|^2 + \beta \|\sum_{i} softmax_i\times i - y_i\|^2 + CrossEntropyLoss
     """
 
-    def __init__(self, alpha=1, beta=1):
+    def __init__(self, xent_weight, alpha=2, beta=1, gamma=1):
+        assert xent_weight is not None
         super(CombinedLoss, self).__init__()
-
         self.alpha = alpha
         self.beta = beta
+        self.gamma = gamma
         self.mae_criterion = nn.L1Loss()
         self.expectation_criterion = ExpectationLoss()
-        self.xent_criterion = nn.CrossEntropyLoss()
+        self.xent_criterion = nn.CrossEntropyLoss(weight=torch.Tensor(xent_weight).to("cuda"))
 
     def forward(self, pred_score, gt_score, pred_probs, pred_cls, gt_cls):
         mae_loss = self.mae_criterion(pred_score, gt_score)
         expectation_loss = self.expectation_criterion(pred_probs, pred_cls, gt_score)
         xent_loss = self.xent_criterion(pred_probs, gt_cls)
 
-        return self.alpha * mae_loss + self.beta * expectation_loss + xent_loss
+        return self.alpha * mae_loss + self.beta * expectation_loss + self.gamma * xent_loss
+
+
+def log_cosh_loss(input, target, epsilon=0):
+    """
+    Definition of LogCosh Loss
+    """
+    return torch.log(torch.cosh(target - input) + epsilon)
+
+
+class SmoothHuberLoss(_Loss):
+    """
+    SmoothHuberLoss
+    if |y-\hat{y}| < \delta, return log(\frac{1}{2}LogCosh(y-\hat{y}))
+    else return |y-\hat{y}|
+    """
+
+    def __init__(self, reduction='mean', delta=0.8):
+        super(SmoothHuberLoss, self).__init__()
+        self.delta = delta
+        self.reduction = reduction
+
+    def forward(self, input, target):
+        t = torch.abs(input - target)
+
+        return torch.mean(torch.where(t < self.delta, log_cosh_loss(input, target), F.l1_loss(input, target)))

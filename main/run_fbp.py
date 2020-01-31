@@ -15,11 +15,12 @@ from sklearn.metrics import recall_score, precision_score, f1_score, confusion_m
 from torch import nn
 from torch.optim import lr_scheduler
 import torch.nn.functional as F
+from torchvision import models
 from pytorchcv.model_provider import get_model as ptcv_get_model
 
 sys.path.append('../')
-from models.nets import PRN1, PRN2, ComboNet
-from models.losses import CombinedLoss
+from models.nets import ComboNet
+from models.losses import CombinedLoss, SmoothHuberLoss
 from data.data_loaders import load_scutfbp, load_hotornot, load_scutfbp5500_64, load_scutfbp5500_cv
 from util.file_util import mkdirs_if_not_exist
 from config.cfg import cfg
@@ -94,11 +95,8 @@ def train_regressor(model, dataloaders, criterion, optimizer, scheduler, num_epo
                     # forward
                     # track history if only in train
                     with torch.set_grad_enabled(phase == 'train'):
-                        outputs = model.forward(inputs)
+                        outputs = model(inputs)
                         outputs = outputs.view(-1)
-
-                        # print(scores.shape)
-                        # print(outputs.shape)
 
                         loss = criterion(outputs, scores)
 
@@ -464,10 +462,9 @@ def train_combinator(model, dataloaders, criterion, optimizer, scheduler, num_ep
         mkdirs_if_not_exist('./model')
         torch.save(model.state_dict(), './model/%s.pth' % model_name)
     else:
-        print('Start testing %s...' % model.__class__.__name__)
+        print('Start testing %s...' % model_name)
         model.load_state_dict(torch.load(os.path.join('./model/%s.pth' % model_name)))
 
-    model.load_state_dict(torch.load('./model/{0}_best_epoch-{1}.pth'.format(model_name, best_record['epoch'])))
     model.eval()
 
     total = 0
@@ -482,10 +479,16 @@ def train_combinator(model, dataloaders, criterion, optimizer, scheduler, num_ep
 
             filenames += data['filename']
             regression_output, classification_output = model(images)
+            probs = F.softmax(classification_output)
+            cls = torch.from_numpy(np.array([[1.0, 2.0, 3.0, 4.0, 5.0]], dtype=np.float).T).to(device)  # for SCUT-FBP*
+            # cls = torch.from_numpy(np.array([[1.0, 2.0, 3.0]], dtype=np.float).T).to(device)  # for HotOrNot
+            expectation = torch.matmul(probs, cls.float()).view(-1).view(-1, 1)
 
+            # output = (2 * regression_output + expectation) / 3
+            output = regression_output
             total += images.size(0)
 
-            y_pred += regression_output.to("cpu").detach().numpy().tolist()
+            y_pred += output.to("cpu").detach().numpy().tolist()
             y_true += data['score'].detach().numpy().tolist()
 
     mae = round(mean_absolute_error(np.array(y_true).ravel(), np.array(y_pred).ravel()), 4)
@@ -511,24 +514,34 @@ def main(model, data_name, model_type):
     :param model_type: classifier/regressor
     :return:
     """
+    xent_weight_list = None
     if data_name == 'SCUT-FBP':
         print('start loading SCUTFBPDataset...')
         dataloaders = load_scutfbp()
+        xent_weight_list = [1, 1, 1, 1, 1]
     elif data_name == 'HotOrNot':
         print('start loading HotOrNotDataset...')
         dataloaders = load_hotornot(cv_split_index=cfg['cv_index'])
+        xent_weight_list = [1, 1, 1]
     elif data_name == 'SCUT-FBP5500':
         print('start loading SCUTFBP5500Dataset...')
         dataloaders = load_scutfbp5500_64()
+        xent_weight_list = [1, 1, 1, 1, 1]
     elif data_name == 'SCUT-FBP5500-CV':
         print('start loading SCUTFBP5500DatasetCV...')
         dataloaders = load_scutfbp5500_cv(cv_index=cfg['cv_index'])
+        xent_weight_list = [1, 1, 1, 1, 1]
     else:
         print('Invalid data name. It can only be [SCUT-FBP], [HotOrNot], [SCUT-FBP5500] or [SCUT-FBP5500-CV]...')
         sys.exit(0)
 
     if model_type == 'regressor':
-        criterion = nn.MSELoss()
+        # criterion = nn.MSELoss()
+        # criterion = nn.SmoothL1Loss()
+        # criterion = nn.L1Loss()
+        criterion = SmoothHuberLoss()
+
+        # optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=0.001)
         optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-4)
         exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.1)
         train_regressor(model=model, dataloaders=dataloaders, criterion=criterion, optimizer=optimizer,
@@ -540,16 +553,22 @@ def main(model, data_name, model_type):
         train_classifier(model, criterion, optimizer, scheduler=exp_lr_scheduler, dataloaders=dataloaders,
                          num_epochs=cfg['epoch'], inference=False)
     elif model_type == 'combinator':
-        criterion = CombinedLoss()
+        criterion = CombinedLoss(xent_weight=xent_weight_list)
         optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=0.001)
+        # optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-4)
         exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.1)
         train_combinator(model, dataloaders, criterion, optimizer, scheduler=exp_lr_scheduler, num_epochs=cfg['epoch'],
                          inference=False)
 
 
 if __name__ == '__main__':
-    # seresnext50 = ptcv_get_model("seresnext50_32x4d", pretrained=True)
-    # num_ftrs = seresnext50.output.in_features
-    # seresnext50.output = nn.Linear(num_ftrs, 1)
-    main(ComboNet(num_out=3), 'HotOrNot', 'combinator')
-    # main(seresnext50, 'SCUT-FBP5500', 'classifier')
+    seresnext50 = ptcv_get_model("seresnext50_32x4d", pretrained=True)
+    num_ftrs = seresnext50.output.in_features
+    seresnext50.output = nn.Linear(num_ftrs, 1)
+
+    # resnet18 = models.resnet18(pretrained=True)
+    # num_ftrs = resnet18.fc.in_features
+    # resnet18.fc = nn.Linear(num_ftrs, 1)
+
+    main(ComboNet(num_out=5), 'SCUT-FBP5500', 'combinator')
+    # main(seresnext50, 'SCUT-FBP5500', 'regressor')
