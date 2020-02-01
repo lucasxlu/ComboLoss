@@ -3,7 +3,7 @@
 **ComboLoss** is a simple yet effective approach for facial attractiveness regression. It can embed 3 different facial beauty information from a regression branch and a classification branch. 
 With SEResNeXt50 as backbone, ComboLoss achieves state-of-the-art performance on ``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset``, which outperforms many methods published at IJCAI, IEEE Transactions on Affective Computing, ICIP, ICASSP, ICPR, PCM and etc.
 
-![ComboLoss](./comboloss.png)
+![ComboLoss](./ComboLoss.png)
 
 If you find the code helps your research, please cite this project as:
 ```
@@ -42,6 +42,8 @@ If you find the code helps your research, please cite this project as:
 | ComboNet (ResNet18)  | CombinedLoss (alpha=2, beta=1, gamma=1) | 0.2557 | 0.3362 | 0.8780 |
 | ComboNet (ResNet18)  | CombinedLoss (alpha=3, beta=1, gamma=1) | 0.2513 | 0.3364 | 0.8788 |
 
+![Samples](./samples.png)
+
 ### Evaluation on SCUT-FBP
 | Backbone | CV | MAE | RMSE | PC |
 | :---: | :---: | :---: | :---: | :---: |
@@ -60,12 +62,12 @@ If you find the code helps your research, please cite this project as:
 ### Evaluation on HotOrNot
 | Backbone | CV | MAE | RMSE | PC |
 | :---: | :---: | :---: | :---: | :---: |
-| ComboNet (SEResNeXt50) | 1 | 0.8450 | 1.0689 | 0.4973 |
-| ComboNet (SEResNeXt50) | 2 | 0.8201 | 1.0490 | 0.5059 |
-| ComboNet (SEResNeXt50) | 3 | 0.8124 | 1.0399 | 0.5027 |
-| ComboNet (SEResNeXt50) | 4 | 0.8111 | 1.0216 | 0.4965 |
-| ComboNet (SEResNeXt50) | 5 | 0.8110 | 1.0409 | 0.4888 |
-| ComboNet (SEResNeXt50) | AVG | 0.8119 | 1.0441 | 0.4982 |
+| ComboNet (SEResNeXt50) | 1 | 0.8207 | 1.0379 | 0.5168 |
+| ComboNet (SEResNeXt50) | 2 | 0.8443 | 1.0912 | 0.4967 |
+| ComboNet (SEResNeXt50) | 3 | 0.8223 | 1.0399 | 0.5148 |
+| ComboNet (SEResNeXt50) | 4 | 0.8737 | 1.0880 | 0.4928 |
+| ComboNet (SEResNeXt50) | 5 | 0.8256 | 1.0487 | 0.4747 |
+| ComboNet (SEResNeXt50) | AVG | 0.8119 | 1.0441 | 0.4992 |
 
 
 ### Evaluation on SCUT-FBP5500 (5-Fold Cross Validation)

@@ -482,7 +482,7 @@ def train_combinator(model, dataloaders, criterion, optimizer, scheduler, num_ep
             probs = F.softmax(classification_output)
             cls = torch.from_numpy(np.array([[1.0, 2.0, 3.0, 4.0, 5.0]], dtype=np.float).T).to(device)  # for SCUT-FBP*
             # cls = torch.from_numpy(np.array([[1.0, 2.0, 3.0]], dtype=np.float).T).to(device)  # for HotOrNot
-            expectation = torch.matmul(probs, cls.float()).view(-1).view(-1, 1)
+            # expectation = torch.matmul(probs, cls.float()).view(-1).view(-1, 1)
 
             # output = (2 * regression_output + expectation) / 3
             output = regression_output
@@ -522,15 +522,24 @@ def main(model, data_name, model_type):
     elif data_name == 'HotOrNot':
         print('start loading HotOrNotDataset...')
         dataloaders = load_hotornot(cv_split_index=cfg['cv_index'])
-        xent_weight_list = [1, 1, 1]
+        xent_weight_list = [3.35, 1.0, 3.34]
     elif data_name == 'SCUT-FBP5500':
         print('start loading SCUTFBP5500Dataset...')
         dataloaders = load_scutfbp5500_64()
-        xent_weight_list = [1, 1, 1, 1, 1]
+        xent_weight_list = [1.88, 1, 1.91, 99.38, 99.38]
     elif data_name == 'SCUT-FBP5500-CV':
         print('start loading SCUTFBP5500DatasetCV...')
         dataloaders = load_scutfbp5500_cv(cv_index=cfg['cv_index'])
-        xent_weight_list = [1, 1, 1, 1, 1]
+        if cfg['cv_index'] == 1:
+            xent_weight_list = [93.3, 1.98, 1.0, 1.91, 102.19]
+        elif cfg['cv_index'] == 2:
+            xent_weight_list = [105.9, 1.92, 1.0, 1.86, 92.09]
+        elif cfg['cv_index'] == 3:
+            xent_weight_list = [97.64, 1.97, 1.0, 1.92, 89.5]
+        elif cfg['cv_index'] == 4:
+            xent_weight_list = [96.68, 1.92, 1.0, 1.9, 106.35]
+        elif cfg['cv_index'] == 5:
+            xent_weight_list = [85.32, 1.94, 1.0, 1.9, 106.65]
     else:
         print('Invalid data name. It can only be [SCUT-FBP], [HotOrNot], [SCUT-FBP5500] or [SCUT-FBP5500-CV]...')
         sys.exit(0)
@@ -570,5 +579,5 @@ if __name__ == '__main__':
     # num_ftrs = resnet18.fc.in_features
     # resnet18.fc = nn.Linear(num_ftrs, 1)
 
-    main(ComboNet(num_out=5), 'SCUT-FBP5500', 'combinator')
+    main(ComboNet(num_out=3), 'HotOrNot', 'combinator')
     # main(seresnext50, 'SCUT-FBP5500', 'regressor')
