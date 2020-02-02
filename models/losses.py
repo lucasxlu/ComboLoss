@@ -48,8 +48,8 @@ class ExpectationLoss(nn.Module):
         self.mae = nn.L1Loss()
 
     def forward(self, probs, cls, gts):
-        # cls = torch.from_numpy(np.array([[1.0, 2.0, 3.0, 4.0, 5.0]], dtype=np.float).T).to(self.device)
-        cls = torch.from_numpy(np.array([[1.0, 2.0, 3.0]], dtype=np.float).T).to(self.device)
+        cls = torch.from_numpy(np.array([[1.0, 2.0, 3.0, 4.0, 5.0]], dtype=np.float).T).to(self.device)
+        # cls = torch.from_numpy(np.array([[1.0, 2.0, 3.0]], dtype=np.float).T).to(self.device)
         return self.mae(torch.mm(probs, cls.float()).view(-1), gts)
 
 

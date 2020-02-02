@@ -518,7 +518,7 @@ def main(model, data_name, model_type):
     if data_name == 'SCUT-FBP':
         print('start loading SCUTFBPDataset...')
         dataloaders = load_scutfbp()
-        xent_weight_list = [1, 1, 1, 1, 1]
+        xent_weight_list = [91.5, 1.0, 1.06, 5.72, 18.3]
     elif data_name == 'HotOrNot':
         print('start loading HotOrNotDataset...')
         dataloaders = load_hotornot(cv_split_index=cfg['cv_index'])
@@ -579,5 +579,5 @@ if __name__ == '__main__':
     # num_ftrs = resnet18.fc.in_features
     # resnet18.fc = nn.Linear(num_ftrs, 1)
 
-    main(ComboNet(num_out=3), 'HotOrNot', 'combinator')
+    main(ComboNet(num_out=5), 'SCUT-FBP', 'combinator')
     # main(seresnext50, 'SCUT-FBP5500', 'regressor')

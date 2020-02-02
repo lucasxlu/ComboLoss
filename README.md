@@ -31,7 +31,7 @@ If you find the code helps your research, please cite this project as:
 | SEResNeXt50 | SmoothL1 | 0.2204 | 0.2901 | 0.9050 |
 | ComboNet (SEResNeXt50) | CombinedLoss (alpha=1, beta=1, gamma=1) | 0.2135 | 0.2818 | 0.9099 |
 | ComboNet (SEResNeXt50)  | CombinedLoss (alpha=2, beta=1, gamma=1) | 0.2191 | 0.2891 | 0.9066 |
-| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=2, beta=1, gamma=1) | 0.2124 | 0.2803 | 0.9108 |
+| ComboNet (SEResNeXt50)  | CombinedLoss (alpha=2, beta=1, gamma=1) | 0.2126 | 0.2813 | 0.9117 |
 | ComboNet (SEResNeXt50)  | CombinedLoss (alpha=3, beta=1, gamma=1) | 0.2190 | 0.2894 | 0.9053 |
 | ComboNet (SEResNeXt50)  | CombinedLoss (alpha=1, beta=2, gamma=1) | 0.2150 | 0.2868 | 0.9063 |
 | ComboNet (SEResNeXt50)  | CombinedLoss (alpha=1, beta=2, gamma=1) | 0.2176 | 0.2895 | 0.9044 |
@@ -47,38 +47,33 @@ If you find the code helps your research, please cite this project as:
 ### Evaluation on SCUT-FBP
 | Backbone | CV | MAE | RMSE | PC |
 | :---: | :---: | :---: | :---: | :---: |
-| SEResNeXt50 | 1 | 0.2689 | 0.3340 | 0.9144 |
-| SEResNeXt50 | 2 | 0.2456 | 0.3050 | 0.9063 |
-| SEResNeXt50 | 3 | 0.2242 | 0.3000 | 0.8880 |
-| SEResNeXt50 | 4 | 0.2282 | 0.2992 | 0.9238 |
-| SEResNeXt50 | 5 | 0.2171 | 0.2889 | 0.9051 |
-| SEResNeXt50 | AVG | 0.2368 | 0.3054 | 0.9075 |
-| ComboNet (SEResNeXt50) | 1 | 0.2606 | 0.3338 | 0.8955 |
-| ComboNet (SEResNeXt50) | 2 |  |  |  |
-| ComboNet (SEResNeXt50) | 3 |  |  |  |
-| ComboNet (SEResNeXt50) | 4 |  |  |  |
-| ComboNet (SEResNeXt50) | 5 |  |  |  |
+|  ComboNet (SEResNeXt50)  | 1 | 0.2689 | 0.3340 | 0.9144 |
+|  ComboNet (SEResNeXt50)  | 2 | 0.2456 | 0.3050 | 0.9063 |
+|  ComboNet (SEResNeXt50)  | 3 | 0.2436 | 0.3095 | 0.9082 |
+|  ComboNet (SEResNeXt50)  | 4 | 0.2282 | 0.2992 | 0.9238 |
+|  ComboNet (SEResNeXt50)  | 5 | 0.2171 | 0.2889 | 0.9051 |
+|  ComboNet (SEResNeXt50)  | AVG | 0.2441 | 0.3122 | 0.9090 |
 
 ### Evaluation on HotOrNot
 | Backbone | CV | MAE | RMSE | PC |
 | :---: | :---: | :---: | :---: | :---: |
 | ComboNet (SEResNeXt50) | 1 | 0.8207 | 1.0379 | 0.5168 |
-| ComboNet (SEResNeXt50) | 2 | 0.8443 | 1.0912 | 0.4967 |
+| ComboNet (SEResNeXt50) | 2 | 0.8273 | 1.0552 | 0.5004 |
 | ComboNet (SEResNeXt50) | 3 | 0.8223 | 1.0399 | 0.5148 |
-| ComboNet (SEResNeXt50) | 4 | 0.8737 | 1.0880 | 0.4928 |
+| ComboNet (SEResNeXt50) | 4 | 0.8108 | 1.0241 | 0.5080 |
 | ComboNet (SEResNeXt50) | 5 | 0.8256 | 1.0487 | 0.4747 |
-| ComboNet (SEResNeXt50) | AVG | 0.8119 | 1.0441 | 0.4992 |
+| ComboNet (SEResNeXt50) | AVG | 0.8213 | 1.0412 | 0.5029 |
 
 
 ### Evaluation on SCUT-FBP5500 (5-Fold Cross Validation)
 | Backbone | CV | MAE | RMSE | PC |
 | :---: | :---: | :---: | :---: | :---: |
-| ComboNet (SEResNeXt50)  | 1 | 0.2124 | 0.2780 | 0.9137 |
-| ComboNet (SEResNeXt50)  | 2 | 0.2121 | 0.2842 | 0.9105 |
-| ComboNet (SEResNeXt50)  | 3 | 0.2056 | 0.2745 | 0.9194 |
-| ComboNet (SEResNeXt50)  | 4 | 0.2037 | 0.2708 | 0.9199 |
-| ComboNet (SEResNeXt50)  | 5 | 0.2011 | 0.2633 | 0.9237 |
-| ComboNet (SEResNeXt50)  | AVG | 0.2170 | 0.2742 | 0.9177 |
+| ComboNet (SEResNeXt50)  | 1 | 0.2119 | 0.2751 | 0.9157 |
+| ComboNet (SEResNeXt50)  | 2 | 0.2084 | 0.2751 | 0.9164 |
+| ComboNet (SEResNeXt50)  | 3 | 0.1998 | 0.2711 | 0.9215 |
+| ComboNet (SEResNeXt50)  | 4 | 0.2050 | 0.2693 | 0.9208 |
+| ComboNet (SEResNeXt50)  | 5 | 0.1999 | 0.2615 | 0.9250 |
+| ComboNet (SEResNeXt50)  | AVG | 0.2050 | 0.2704 | 0.9199 |
 
 
 ## Comparison with prior arts on SCUT-FBP5500

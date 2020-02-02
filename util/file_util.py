@@ -1,6 +1,9 @@
 import os
 import numpy as np
 import pandas as pd
+from sklearn.model_selection import train_test_split
+
+from config.cfg import cfg
 
 
 def mkdirs_if_not_exist(dir_name):
@@ -65,11 +68,21 @@ def score_stat(data_name):
         q3 = np.percentile(datalist, 75)
         print(q1, median, q3)
     elif data_name == 'SCUT-FBP':
-        pass
+        anno_xlsx = '/Users/lucasx/fsdownload/AttractivenessLabel.xlsx'
+        scores = pd.read_excel(anno_xlsx)['Attractiveness label']
+
+        X_train, X_test, y_train, y_test = train_test_split(scores, scores, test_size=0.2,
+                                                            random_state=cfg['random_seed'])
+        for score in y_train:
+            cls = round(score) - 1
+            if cls in mp.keys():
+                mp[cls] += 1
+            else:
+                mp[cls] = 1
 
     print(mp)
-    print([round(max(mp.values()) / mp[i], 2) for i in range(3)])
+    print([round(max(mp.values()) / mp[i], 2) for i in range(5)])
 
 
 if __name__ == '__main__':
-    score_stat("HotOrNot")
+    score_stat("SCUT-FBP")
