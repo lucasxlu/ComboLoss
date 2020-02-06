@@ -1,7 +1,6 @@
 # ComboLoss for Facial Attractiveness Analysis with Squeeze-and-Excitation Networks
 ## Introduction
-**ComboLoss** is a simple yet effective approach for facial attractiveness regression. It can embed 3 different facial beauty information from a regression branch and a classification branch. 
-With SEResNeXt50 as backbone, ComboLoss achieves state-of-the-art performance on ``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset``, which outperforms many methods published at IJCAI, IEEE Transactions on Affective Computing, ICIP, ICASSP, ICPR, PCM and etc.
+This repository holds the PyTorch implementation of **ComboLoss** for facial attractiveness analysis. With SEResNeXt50 as backbone, ComboLoss achieves state-of-the-art performance on ``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset``, which outperforms many methods published at IJCAI, IEEE Transactions on Affective Computing, ICIP, ICASSP, ICPR, PCM and etc.
 
 ![ComboLoss](./ComboLoss.png)
 
@@ -13,6 +12,8 @@ If you find the code helps your research, please cite this project as:
   year={2020}
 }
 ```
+
+Pretrained Models on SCUT-FBP5500 with 60%/40% data splitting setting: [ComboLoss_SCUT-FBP5500](https://drive.google.com/open?id=1O9T41BJglXBWlm6nJCuHIGzl3iSDvBdc)
 
 ## Data Description
 | Dataset | Median | Mean |
@@ -86,7 +87,7 @@ If you find the code helps your research, please cite this project as:
 | AaNet | IJCAI'19 | 0.2236 | 0.2954 | 0.9055 |
 | R^2 ResNeXt  | ICPR'18 | 0.2416 | 0.3046 | 0.8957 |
 | R^3CNN | IEEE Trans on Affective Computing | 0.2120 | 0.2800 | 0.9142 |
-| **ComboLoss (Ours)** | - | 0.2170 | **0.2742** | **0.9177** |
+| **ComboLoss (Ours)** | - | **0.2050** | **0.2704** | **0.9199** |
 
 
 ## Reference
