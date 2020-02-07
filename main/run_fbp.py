@@ -550,8 +550,7 @@ def main(model, data_name, model_type):
         # criterion = nn.L1Loss()
         criterion = SmoothHuberLoss()
 
-        # optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=0.001)
-        optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-4)
+        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=0.001)
         exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.1)
         train_regressor(model=model, dataloaders=dataloaders, criterion=criterion, optimizer=optimizer,
                         scheduler=exp_lr_scheduler, num_epochs=cfg['epoch'], inference=False)
