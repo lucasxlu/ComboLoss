@@ -6,7 +6,7 @@ This repository holds the PyTorch implementation of **ComboLoss** for facial att
 
 If you find the code helps your research, please cite this project as:
 ```
-@misc{xu2019comboloss,
+@misc{xu2020comboloss,
   title={ComboLoss for Facial Attractiveness Analysis with Squeeze-and-Excitation Networks},
   author={Lu Xu and Jinhai Xiang},
   year={2020}
