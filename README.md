@@ -89,6 +89,12 @@ Pretrained Models on SCUT-FBP5500 with 60%/40% data splitting setting: [ComboLos
 | R^3CNN | IEEE Trans on Affective Computing | 0.2120 | 0.2800 | 0.9142 |
 | **ComboLoss (Ours)** | - | **0.2050** | **0.2704** | **0.9199** |
 
+## Ablation Study (6/4 splitting strategy)
+| Model | w/wo balanced Xent Loss | MAE | RMSE | PC |
+| :---: | :---: | :---: | :---: | :---: |
+| SEResNeXt50 + ComboLoss | w | **0.2126** | **0.2813** | **0.9117** |
+| SEResNeXt50 + ComboLoss | wo | 0.2115 | 0.2814 | 0.9099 |
+
 
 ## Reference
 1. Xu L, Xiang J, Yuan X. [CRNet: Classification and Regression Neural Network for Facial Beauty Prediction](https://link.springer.com/chapter/10.1007/978-3-030-00764-5_61)[C]//Pacific Rim Conference on Multimedia. Springer, Cham, 2018: 661-671.
