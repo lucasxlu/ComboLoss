@@ -1,6 +1,8 @@
 # ComboLoss for Facial Attractiveness Analysis with Squeeze-and-Excitation Networks
 ## Introduction
-This repository holds the PyTorch implementation of **ComboLoss** for facial attractiveness analysis. With SEResNeXt50 as backbone, ComboLoss achieves state-of-the-art performance on ``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset``, which outperforms many methods published at IJCAI, IEEE Transactions on Affective Computing, ICIP, ICASSP, ICPR, PCM and etc.
+This repository holds the official PyTorch implementation of paper ``ComboLoss for Facial Attractiveness Analysis with Squeeze-and-Excitation Networks``. 
+With SEResNeXt50 as backbone, ComboLoss achieves state-of-the-art performance on ``SCUT-FBP, HotOrNot and SCUT-FBP5500 dataset``, which outperforms 
+many methods published at IJCAI, IEEE Transactions on Affective Computing, ICIP, ICASSP, ICPR, PCM and etc.
 
 ![ComboLoss](./ComboLoss.png)
 
@@ -14,7 +16,8 @@ If you find the code helps your research, please cite this project as:
 }
 ```
 
-Pretrained Models on SCUT-FBP5500 with 60%/40% data splitting setting: [ComboLoss_SCUT-FBP5500](https://drive.google.com/open?id=1O9T41BJglXBWlm6nJCuHIGzl3iSDvBdc)
+Pretrained Models on SCUT-FBP5500 with 60%/40% data splitting setting: [ComboLoss_SCUT-FBP5500](https://drive.google.com/open?id=1O9T41BJglXBWlm6nJCuHIGzl3iSDvBdc).
+We also provide [inference.py](main/inference.py) code.
 
 ## Data Description
 | Dataset | Median | Mean |
@@ -93,8 +96,8 @@ Pretrained Models on SCUT-FBP5500 with 60%/40% data splitting setting: [ComboLos
 ## Ablation Study (6/4 splitting strategy)
 | Model | w/wo balanced Xent Loss | MAE | RMSE | PC |
 | :---: | :---: | :---: | :---: | :---: |
-| SEResNeXt50 + ComboLoss | w | **0.2126** | **0.2813** | **0.9117** |
-| SEResNeXt50 + ComboLoss | wo | 0.2115 | 0.2814 | 0.9099 |
+| SEResNeXt50 + ComboLoss | w | 0.2126 | **0.2813** | **0.9117** |
+| SEResNeXt50 + ComboLoss | wo | **0.2115** | 0.2814 | 0.9099 |
 
 
 ## Reference
