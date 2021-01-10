@@ -48,7 +48,7 @@ def train_regressor(model, dataloaders, criterion, optimizer, scheduler, num_epo
         model = nn.DataParallel(model)
     model = model.to(device)
 
-    dataset_sizes = {x: dataloaders[x].__len__() for x in ['train', 'val', 'test']}
+    dataset_sizes = {x: dataloaders[x].dataset for x in ['train', 'val', 'test']}
 
     if not inference:
         print('Start training %s...' % model_name)
@@ -114,7 +114,7 @@ def train_regressor(model, dataloaders, criterion, optimizer, scheduler, num_epo
                     if torch.__version__ >= '1.1.0':
                         scheduler.step()
 
-                epoch_loss = running_loss / (dataset_sizes[phase] * cfg['batch_size'])
+                epoch_loss = running_loss / dataset_sizes[phase]
 
                 epoch_mae = round(mean_absolute_error(np.array(epoch_gt).flatten(), np.array(epoch_pred).flatten()), 4)
                 epoch_rmse = round(
@@ -430,7 +430,7 @@ def train_combinator(model, dataloaders, criterion, optimizer, scheduler, num_ep
                     if torch.__version__ >= '1.1.0':
                         scheduler.step()
 
-                epoch_loss = running_loss / (dataset_sizes[phase] * cfg['batch_size'])
+                epoch_loss = running_loss / dataset_sizes[phase]
 
                 epoch_mae = round(mean_absolute_error(np.array(epoch_gt).flatten(), np.array(epoch_pred).flatten()), 4)
                 epoch_rmse = round(
