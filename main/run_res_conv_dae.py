@@ -19,7 +19,8 @@ sys.path.append('../')
 from models import ssim
 from models.resconvdae import *
 from models.losses import ReconstructionLoss
-from data.data_loaders import load_scutfbp, load_hotornot, load_scutfbp5500_64, load_scutfbp5500_cv
+from data.data_loaders import load_reconstruct_scutfbp, load_reconstruct_hotornot, load_reconstruct_scutfbp5500_64, \
+    load_reconstruct_scutfbp5500_cv
 from util.file_util import mkdirs_if_not_exist
 from config.cfg import cfg
 
@@ -183,16 +184,16 @@ def main(model, data_name):
 
     if data_name == 'SCUT-FBP':
         print('start loading SCUTFBPDataset...')
-        dataloaders = load_scutfbp()
+        dataloaders = load_reconstruct_scutfbp()
     elif data_name == 'HotOrNot':
         print('start loading HotOrNotDataset...')
-        dataloaders = load_hotornot(cv_split_index=cfg['cv_index'])
+        dataloaders = load_reconstruct_hotornot(cv_split_index=cfg['cv_index'])
     elif data_name == 'SCUT-FBP5500':
         print('start loading SCUTFBP5500Dataset...')
-        dataloaders = load_scutfbp5500_64()
+        dataloaders = load_reconstruct_scutfbp5500_64()
     elif data_name == 'SCUT-FBP5500CV':
         print('start loading SCUTFBP5500Dataset Cross Validation...')
-        dataloaders = load_scutfbp5500_cv(cfg['cv_index'])
+        dataloaders = load_reconstruct_scutfbp5500_cv(cfg['cv_index'])
     else:
         print('Invalid data name. It can only be SCUT-FBP or HotOrNot...')
         sys.exit(0)

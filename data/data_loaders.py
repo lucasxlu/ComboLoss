@@ -134,3 +134,108 @@ def load_scutfbp5500_cv(cv_index=1):
             'test']), batch_size=cfg['batch_size'], shuffle=False, num_workers=50, pin_memory=True, drop_last=False)
 
     return {'train': train_loader, 'val': test_loader, 'test': test_loader}
+
+
+def load_reconstruct_scutfbp():
+    """
+    load SCUTFBP Dataset for Reconstruction
+    :return:
+    """
+    df = pd.read_excel('../data/SCUT-FBP.xlsx', sheet_name='Sheet1')
+    X_train, X_test, y_train, y_test = train_test_split(df['Image'].tolist(), df['Attractiveness label'],
+                                                        test_size=0.2, random_state=cfg['random_seed'])
+
+    resize_to = 224
+
+    train_dataset = ScutFBPDataset(f_list=X_train, f_labels=y_train, transform=transforms.Compose([
+        transforms.Resize(resize_to),
+        transforms.ToTensor(),
+    ]))
+
+    test_dataset = ScutFBPDataset(f_list=X_test, f_labels=y_test, transform=transforms.Compose([
+        transforms.Resize(resize_to),
+        transforms.ToTensor(),
+    ]))
+
+    train_dataloader = DataLoader(train_dataset, batch_size=cfg['batch_size'],
+                                  shuffle=True, num_workers=50, pin_memory=True)
+    test_dataloader = DataLoader(test_dataset, batch_size=cfg['batch_size'],
+                                 shuffle=False, num_workers=50, pin_memory=True)
+
+    return {'train': train_dataloader, 'val': test_dataloader, 'test': test_dataloader}
+
+
+def load_reconstruct_hotornot(cv_split_index=1):
+    """
+    load HotOrNot Dataset for Reconstruction
+    :param cv_split_index:
+    :return:
+    """
+    train_dataset = HotOrNotDataset(cv_split_index=cv_split_index, train=True, transform=transforms.Compose([
+        transforms.Resize(224),
+        transforms.ToTensor(),
+    ]))
+
+    test_dataset = HotOrNotDataset(cv_split_index=cv_split_index, train=False, transform=transforms.Compose([
+        transforms.Resize(224),
+        transforms.ToTensor(),
+    ]))
+
+    train_dataloader = DataLoader(train_dataset, batch_size=cfg['batch_size'],
+                                  shuffle=True, num_workers=50, pin_memory=True)
+    test_dataloader = DataLoader(test_dataset, batch_size=cfg['batch_size'],
+                                 shuffle=False, num_workers=50, pin_memory=True)
+
+    return {'train': train_dataloader, 'val': test_dataloader, 'test': test_dataloader}
+
+
+def load_reconstruct_scutfbp5500_64():
+    """
+    load Face Dataset for SCUT-FBP5500 with 6/4 split CV for Reconstruction
+    :return:
+    """
+    data_transforms = {
+        'train': transforms.Compose([
+            transforms.Resize(224),
+            transforms.ToTensor(),
+        ]),
+        'test': transforms.Compose([
+            transforms.Resize(224),
+            transforms.ToTensor(),
+        ]),
+    }
+
+    train_loader = torch.utils.data.DataLoader(SCUTFBP5500Dataset(train=True, transform=data_transforms['train']),
+                                               batch_size=cfg['batch_size'], shuffle=True, num_workers=50,
+                                               pin_memory=True)
+    test_loader = torch.utils.data.DataLoader(SCUTFBP5500Dataset(train=False, transform=data_transforms['test']),
+                                              batch_size=cfg['batch_size'], shuffle=False, num_workers=50,
+                                              pin_memory=True)
+
+    return {'train': train_loader, 'val': test_loader, 'test': test_loader}
+
+
+def load_reconstruct_scutfbp5500_cv(cv_index=1):
+    """
+    load SCUT-FBP5500 with Cross Validation Index for Reconstruction
+    :return:
+    """
+    data_transforms = {
+        'train': transforms.Compose([
+            transforms.Resize(224),
+            transforms.ToTensor(),
+        ]),
+        'test': transforms.Compose([
+            transforms.Resize(224),
+            transforms.ToTensor(),
+        ]),
+    }
+
+    train_loader = torch.utils.data.DataLoader(
+        SCUTFBP5500DatasetCV(cv_index=cv_index, train=True, transform=data_transforms[
+            'train']), batch_size=cfg['batch_size'], shuffle=True, num_workers=50, pin_memory=True, drop_last=True)
+    test_loader = torch.utils.data.DataLoader(
+        SCUTFBP5500DatasetCV(cv_index=cv_index, train=False, transform=data_transforms[
+            'test']), batch_size=cfg['batch_size'], shuffle=False, num_workers=50, pin_memory=True, drop_last=False)
+
+    return {'train': train_loader, 'val': test_loader, 'test': test_loader}
