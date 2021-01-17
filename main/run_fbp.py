@@ -311,7 +311,7 @@ def train_classifier(model, criterion, optimizer, scheduler, dataloaders, num_ep
 
             filenames += data['filename']
             outputs = model(images)
-            outputs = F.softmax(outputs)
+            outputs = F.softmax(outputs, dim=1)
             # get TOP-K output labels and corresponding probabilities
             topK_prob, topK_label = torch.topk(outputs, 1)
             probs += topK_prob.to("cpu").detach().numpy().tolist()
@@ -479,7 +479,7 @@ def train_combinator(model, dataloaders, criterion, optimizer, scheduler, num_ep
 
             filenames += data['filename']
             regression_output, classification_output = model(images)
-            probs = F.softmax(classification_output)
+            probs = F.softmax(classification_output, dim=1)
             cls = torch.from_numpy(np.array([[1.0, 2.0, 3.0, 4.0, 5.0]], dtype=np.float).T).to(device)  # for SCUT-FBP*
             # cls = torch.from_numpy(np.array([[1.0, 2.0, 3.0]], dtype=np.float).T).to(device)  # for HotOrNot
             # expectation = torch.matmul(probs, cls.float()).view(-1).view(-1, 1)

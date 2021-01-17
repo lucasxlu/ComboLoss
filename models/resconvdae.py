@@ -136,8 +136,8 @@ class Decoder(nn.Module):
         self.relu6 = nn.ReLU()
 
         self.deconv7 = nn.Conv2d(64, 3, kernel_size=3, padding=1, bias=self.with_bias)  # 224*224
-        # self.bn7 = nn.BatchNorm2d(3)
-        # self.tanh7 = nn.Tanh()
+        self.bn7 = nn.BatchNorm2d(3)
+        self.tanh7 = nn.Tanh()
 
     def forward(self, x):
         x1 = self.deconv1(x)
@@ -167,10 +167,10 @@ class Decoder(nn.Module):
         x20 = self.relu6(x19)
 
         x21 = self.deconv7(x20)
-        # x22 = self.bn7(x21)
-        # x23 = self.tanh7(x22)
+        x22 = self.bn7(x21)
+        x23 = self.tanh7(x22)
 
-        return x21
+        return x23
 
     def num_flat_features(self, x):
         size = x.size()[1:]  # all dimensions except the batch dimension
