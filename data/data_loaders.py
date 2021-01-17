@@ -145,15 +145,13 @@ def load_reconstruct_scutfbp():
     X_train, X_test, y_train, y_test = train_test_split(df['Image'].tolist(), df['Attractiveness label'],
                                                         test_size=0.2, random_state=cfg['random_seed'])
 
-    resize_to = 224
-
     train_dataset = ScutFBPDataset(f_list=X_train, f_labels=y_train, transform=transforms.Compose([
-        transforms.Resize(resize_to),
+        transforms.Resize((224, 224)),
         transforms.ToTensor(),
     ]))
 
     test_dataset = ScutFBPDataset(f_list=X_test, f_labels=y_test, transform=transforms.Compose([
-        transforms.Resize(resize_to),
+        transforms.Resize((224, 224)),
         transforms.ToTensor(),
     ]))
 
@@ -172,12 +170,12 @@ def load_reconstruct_hotornot(cv_split_index=1):
     :return:
     """
     train_dataset = HotOrNotDataset(cv_split_index=cv_split_index, train=True, transform=transforms.Compose([
-        transforms.Resize(224),
+        transforms.Resize((224, 224)),
         transforms.ToTensor(),
     ]))
 
     test_dataset = HotOrNotDataset(cv_split_index=cv_split_index, train=False, transform=transforms.Compose([
-        transforms.Resize(224),
+        transforms.Resize((224, 224)),
         transforms.ToTensor(),
     ]))
 
@@ -196,11 +194,11 @@ def load_reconstruct_scutfbp5500_64():
     """
     data_transforms = {
         'train': transforms.Compose([
-            transforms.Resize(224),
+            transforms.Resize((224, 224)),
             transforms.ToTensor(),
         ]),
         'test': transforms.Compose([
-            transforms.Resize(224),
+            transforms.Resize((224, 224)),
             transforms.ToTensor(),
         ]),
     }
@@ -222,11 +220,11 @@ def load_reconstruct_scutfbp5500_cv(cv_index=1):
     """
     data_transforms = {
         'train': transforms.Compose([
-            transforms.Resize(224),
+            transforms.Resize((224, 224)),
             transforms.ToTensor(),
         ]),
         'test': transforms.Compose([
-            transforms.Resize(224),
+            transforms.Resize((224, 224)),
             transforms.ToTensor(),
         ]),
     }

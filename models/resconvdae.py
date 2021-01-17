@@ -137,7 +137,7 @@ class Decoder(nn.Module):
 
         self.deconv7 = nn.Conv2d(64, 3, kernel_size=3, padding=1, bias=self.with_bias)  # 224*224
         self.bn7 = nn.BatchNorm2d(3)
-        self.tanh7 = nn.Tanh()
+        self.sigmoid7 = nn.Sigmoid()
 
     def forward(self, x):
         x1 = self.deconv1(x)
@@ -150,6 +150,7 @@ class Decoder(nn.Module):
 
         x7 = self.deconv3(x6)
         x8 = self.bn3(x7)
+        x8 = x2 + x5 + x8  # shortcut
         x9 = self.relu3(x8)
         x10 = self.unpool3(x9)
 
@@ -159,6 +160,7 @@ class Decoder(nn.Module):
 
         x14 = self.deconv5(x13)
         x15 = self.bn5(x14)
+        x15 = x12 + x15  # shortcut
         x16 = self.relu5(x15)
         x17 = self.unpool5(x16)
 
@@ -168,7 +170,8 @@ class Decoder(nn.Module):
 
         x21 = self.deconv7(x20)
         x22 = self.bn7(x21)
-        x23 = self.tanh7(x22)
+        x22 = x19 + x22
+        x23 = self.sigmoid7(x22)
 
         return x23
 
