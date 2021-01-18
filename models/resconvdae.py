@@ -146,31 +146,31 @@ class Decoder(nn.Module):
 
         x4 = self.deconv2(x3)
         x5 = self.bn2(x4)
+        x5 = x2 + x5  # shortcut
         x6 = self.relu2(x5)
 
         x7 = self.deconv3(x6)
         x8 = self.bn3(x7)
-        x8 = x2 + x5 + x8  # shortcut
         x9 = self.relu3(x8)
         x10 = self.unpool3(x9)
 
         x11 = self.deconv4(x10)
         x12 = self.bn4(x11)
+        # x12 = x8 + x12  # shortcut
         x13 = self.relu4(x12)
 
         x14 = self.deconv5(x13)
         x15 = self.bn5(x14)
-        x15 = x12 + x15  # shortcut
         x16 = self.relu5(x15)
         x17 = self.unpool5(x16)
 
         x18 = self.deconv6(x17)
         x19 = self.bn6(x18)
+        # x19 = x15 + x19  # shortcut
         x20 = self.relu6(x19)
 
         x21 = self.deconv7(x20)
         x22 = self.bn7(x21)
-        x22 = x19 + x22
         x23 = self.sigmoid7(x22)
 
         return x23
